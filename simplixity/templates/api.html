@@ -1,10 +1,16 @@
-<html>
-REST API for cool people with cool ideas for things
-
-GET <a href="/user">/user</a> -  Get all the users <br />
-GET /user/[user_id] - Get an individual user <br />
-GET /person/[person_id] - Get an individual person 
-GET /policy[policy_id] - Get a policy
+{% extends "base.html" %}
 
 
-</html>
+{%block content %}
+
+<h1>API Reference</h1>
+Get all the users
+<pre>GET /user</pre>
+Get an individual user
+<pre>GET /user/[user_id]</pre>
+Get an individual person
+<pre>GET /person/[person_id]</pre>
+Get an individual policy
+<pre>GET /policy[policy_id]</pre>
+{% endblock %}
+
