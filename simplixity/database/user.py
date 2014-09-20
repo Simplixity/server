@@ -6,12 +6,16 @@ class User (db.document):
     father = db.ReferenceField(Person)
     emergency = db.ReferenceField(Person)
 
-    religiousPreference = db.StringField(
+    religious_preference = db.StringField(
         max_length=50
     )
 
-    organDonor = db.BooleanField(
+    organ_donor = db.BooleanField(
         required=True
     )
 
-    conditions = db.EmbeddedDocumentField(condition)
+    conditions = db.ListField(db.EmbeddedDocumentField('Condition'))
+
+class Condition(db.EmbeddedDocument):
+    type = db.StringField()
+    code = db.StringField()

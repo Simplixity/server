@@ -4,26 +4,40 @@ class Person(db.Document):
         default=datetime.now,
         required=True
     )
-
-    birth_date = db.DateTimeField(
-        required=True
-    )
-
+    
     first_name = db.StringField(
         max_length=50
     )
-
+    
     last_name = db.StringField(
         max_length=50
     )
-
-    address = db.EmbeddedDocumentField(Address)
+    
+    addresses = db.ListField(db.EmbeddedDocumentField('Address'))
+    
+    birth_address = db.EmbeddedDocumentField('Address')
     
     social_security = db.IntField(
         required=True,
         unique=True,
         max_length=9
     )
+    
+    sex = db.StringField()
+    
+    martial_status = db.StringField()
+    
+    race = db.StringField()
+    
+    birth_date = db.DateTimeField(
+        required=True
+    )
+    
+    emails = db.ListField(db.EmailField(
+        max_length=100,
+        required=True,
+        unique=True
+    ))
     
     home_phone = db.StringField(
         max_length=15
@@ -32,18 +46,6 @@ class Person(db.Document):
     work_phone = db.StringField(
         max_length=15
     )
-
-    email = db.EmailField(
-        max_length=100,
-        required=True,
-        unique=True
-    )
-
-    sex = db.StringField()
-    
-    martial_status = db.StringField()
-    
-    race = db.StringField()
     
     meta = {
         'allow_inheritance': True,
