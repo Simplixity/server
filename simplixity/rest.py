@@ -6,12 +6,15 @@ from simplixity import app
 from simplixity import db
 from simplixity.database import User, Person, Organization, Policy
 
-from flask import jsonify
+from flask import jsonify, render_template
 
 
 
 import uuid
 
+@app.route('/api', methods=['GET'])
+def api_help():
+    return render_template('api.html')
 
 @app.route('/user', methods=['GET'])
 def get_user():
