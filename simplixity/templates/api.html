@@ -4,13 +4,34 @@
 {%block content %}
 
 <h1>API Reference</h1>
+<h3>Users and Policies</h3>
 Get all the users
 <pre>GET /user</pre>
+Sample user JSON:
+<pre>{
+    _id: {
+        $oid: "541dfcdaee6da110ec9326f9"
+    },
+    conditions: [{ code: "123456789",
+                   type: "allergy"}],
+    organ_donor: true,
+    policies: [{ $oid: "541dfcdaee6da110ec9326f8"}],
+    employer: "Virginia Commonwealth University"
+}
+</pre>
 Get an individual user
 <pre>GET /user/[user_id]</pre>
-Get an individual person
-<pre>GET /person/[person_id]</pre>
+Get an individual's personal data
+<pre>GET /person/[user_id]</pre>
 Get an individual policy
 <pre>GET /policy[policy_id]</pre>
+
+<h3>Sessions</h3>
+Create get a new (fake) session.  Returns a user object and a session ID.
+<pre>POST /user</pre>
+
+<h3>Transfer Data</h3>
+Create a new transfer
+<pre>POST /transfer</pre>
 {% endblock %}
 
