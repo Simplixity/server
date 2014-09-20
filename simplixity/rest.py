@@ -4,7 +4,7 @@ REST endpoints for Simplixity
 
 from simplixity import app
 from simplixity import db
-from simplixity.database import User, Person, Organization
+from simplixity.database import User, Person, Organization, Policy
 
 from flask import jsonify
 
@@ -39,19 +39,10 @@ def get_person(person_id):
     return Person.objects(pk=person_id).to_json()
 
 
-@app.route('/record', methods=['GET'])
-def get_record():
-    """Gets a record for a user.
-
-    Returns a JSON object for a record"""
-    return jsonify({'dummy_data': 'whatever'})
+@app.route('/policy/<policy_id>', methods=['GET'])
+def get_policy(policy_id):
+    return Policy.objects(pk=policy_id).to_json()
 
 
-@app.route('/record', methods=['POST'])
-def add_record():
-    """Adds a record for a user.
-
-    Returns the record ID"""
-    return jsonify({'dummy_data': 'whatever'})
 
 

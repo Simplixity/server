@@ -18,7 +18,7 @@ def make_fake_address():
 
 def make_fake_condition():
     c = Condition()
-    c.type = 'allergy'
+    c.type = 'allergy' if fake.boolean() else 'disease'
     c.code = '123456789'
     return c
 
