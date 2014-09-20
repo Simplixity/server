@@ -16,10 +16,12 @@ import uuid
 @app.route('/user', methods=['GET'])
 def get_user():
     """Lets make a method that gets all the users"""
-
-    users =  User.objects.all()
-    print users
     return User.objects.to_json()
+
+@app.route('/user/<user_id>')
+def get_single_user(user_id):
+    return User.objects(pk=user_id).to_json()
+
 
 @app.route('/user', methods=['POST'])
 def authorize():
