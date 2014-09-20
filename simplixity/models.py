@@ -17,4 +17,4 @@ class User(db.Document):
 
 class Record(db.Document):
     created_at = db.DateTimeField(default=datetime.datetime.now, required=True)
-    
+
