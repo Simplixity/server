@@ -5,22 +5,22 @@ from flask.ext.mongoengine.wtf import model_form
 
 class User(db.Document):
     created_at = db.DateTimeField(
-        default=datetime.now, 
+        default=datetime.now,
         required=True
     )
-    
+
     email = db.EmailField(
         verbose_name=u'e-mail',
         max_length=100,
         required=True,
         unique=True
     )
-    
+
     first_name = db.StringField(
         verbose_name=u'fname',
         max_length=50
     )
-    
+
     last_name = db.StringField(
         verbose_name=u'lname',
         max_length=50
@@ -43,7 +43,7 @@ class User(db.Document):
     )
 
     last_login = db.DateTimeField(
-        verbose_name=u'último login',
+        verbose_name=u'ultimo login',
         required=False
     )"""
 
@@ -61,6 +61,6 @@ class User(db.Document):
 
 class Record(db.Document):
     created_at = db.DateTimeField(
-        default=datetime.now, 
+        default=datetime.now,
         required=True
     )
