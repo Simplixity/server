@@ -4,10 +4,8 @@
 <div class="page-header">
 <h3>Registration</h3>
 </div>
-<form action="{{ url_for('accounts_app.signup') }}" method="post" class="form-horizontal">
-{{ form.hidden_tag() }}
-{% import 'form_macro.html' as form_macro %}
-{{ form_macro.form_field(form.email, with_label=True) }}
+<form action="{{ url_for('rest.register') }}" method="post" class="form-horizontal">
+
 <div class="form-actions">
 	<button type="submit" class="btn btn-icon btn-primary">Send</button>
 </div>
