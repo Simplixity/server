@@ -14,8 +14,8 @@ class Policy(db.Document):
     group_id = db.StringField()
     group_name = db.StringField()
 
-    effectiveStart = db.DateTimeField()
-    effectiveEnd = db.DateTimeField()
+    effective_start = db.DateTimeField()
+    effective_end = db.DateTimeField()
 
     is_in_effect = db.BooleanField()
 

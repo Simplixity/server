@@ -54,6 +54,7 @@ class Person(db.Document):
         'allow_inheritance': True,
         'indexes': ['social_security'],
     }
-
+    """
     def __unicode__(self):
         return u'%s %s %s' % self.first_name, self.last_name (self.email)
+    """

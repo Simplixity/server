@@ -18,6 +18,8 @@ class User (db.Document):
 
     conditions = db.ListField(db.EmbeddedDocumentField('Condition'))
 
+    policies = db.ListField(db.ReferenceField('Policy'))
+
 class Condition(db.EmbeddedDocument):
     type = db.StringField()
     code = db.StringField()

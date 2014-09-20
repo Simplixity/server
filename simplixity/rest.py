@@ -34,6 +34,11 @@ def authorize():
     return jsonify({'session_id': uuid.uuid4(), 'user': user})
 
 
+@app.route('/person/<person_id>', methods=['GET'])
+def get_person(person_id):
+    return Person.objects(pk=person_id).to_json()
+
+
 @app.route('/record', methods=['GET'])
 def get_record():
     """Gets a record for a user.
