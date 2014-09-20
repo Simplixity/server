@@ -3,25 +3,33 @@ REST endpoints for Simplixity
 """
 
 from simplixity import app
-import simplixity.database
+from simplixity import db
+from simplixity.database import User, Person, Organization
+
 from flask import jsonify
+
+
 
 import uuid
 
 
-@app.rotue('/organization', methods=['GET'])
-def get_orgs():
-    pass
+@app.route('/user', methods=['GET'])
+def get_user():
+    """Lets make a method that gets all the users"""
 
+    users =  User.objects.all()
+    print users
+    return User.objects.to_json()
 
 @app.route('/user', methods=['POST'])
 def authorize():
     """This is a fake authorization method that the phone app calls
     to initiate logging in
 
-    Returns a fake session ID.
+    Returns a user and a fake session ID
     """
-    return jsonify({'session_id': uuid.uuid4()})
+    user = User.objects.all()[0]
+    return jsonify({'session_id': uuid.uuid4(), 'user': user})
 
 
 @app.route('/record', methods=['GET'])

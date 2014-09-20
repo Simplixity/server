@@ -6,7 +6,6 @@ This is going to jam some sweet sweet data into your mongo.
 from pymongo import MongoClient
 
 # Everyone's doing game of thrones these days...
-
 sample_orgs = [{'name': 'The Wall',
                 'address': [{
                     'street': '123 Wall Way',
@@ -52,25 +51,24 @@ sample_people = [
          ]
 
 
-sample_users = [{'person': sample_people[0],
-                 'employer': sample_orgs[0]}
-        ]
+sample_users = [{'person': sample_people[0], 'employer': sample_orgs[0]}]
+
 
 if __name__ == '__main__':
     print 'Simplixity Data Insertion'
 
     client = MongoClient()
     db = client['simplixity']
-    people = db.people
+    person = db.person
 
 
-    people.remove(None)
-    result = people.insert(sample_people)
+    person.remove(None)
+    result = person.insert(sample_people)
     print 'Inserted %s people' % len(result)
 
-    users = db.users
-    users.remove(None)
-    result = users.insert(sample_users)
+    user = db.user
+    user.remove(None)
+    result = user.insert(sample_users)
     print 'Inserted %s users' % len(result)
 
 

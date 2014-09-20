@@ -1,10 +1,12 @@
-class User (db.document):
-    person = db.ReferenceField(Person)
-    employer = db.ReferenceField(Organization)
-    guardian = db.ReferenceField(Person)
-    mother = db.ReferenceField(Person)
-    father = db.ReferenceField(Person)
-    emergency = db.ReferenceField(Person)
+from simplixity import db
+
+class User (db.Document):
+    person = db.ReferenceField('Person', primary_key=True)
+    employer = db.ReferenceField('Organization')
+    guardian = db.ReferenceField('Person')
+    mother = db.ReferenceField('Person')
+    father = db.ReferenceField('Person')
+    emergency = db.ReferenceField('Person')
 
     religious_preference = db.StringField(
         max_length=50
