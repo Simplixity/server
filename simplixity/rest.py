@@ -36,6 +36,11 @@ def authorize():
     user = User.objects.all()[0]
     return jsonify({'session_id': uuid.uuid4(), 'user': user})
 
+def recover_password():
+    pass
+
+def register():
+    pass
 
 @app.route('/person/<person_id>', methods=['GET'])
 def get_person(person_id):
