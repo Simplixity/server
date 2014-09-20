@@ -6,44 +6,71 @@ This is going to jam some sweet sweet data into your mongo.
 from pymongo import MongoClient
 
 # Everyone's doing game of thrones these days...
-sample_data = [
+
+sample_orgs = [{'name': 'The Wall',
+                'address': [{
+                    'street': '123 Wall Way',
+                    'unit': 'Office of the Lord Commander',
+                    'city': 'The North',
+                    'state': 'KY',
+                    'zip_code': '00000',
+                    'country': 'Westeros'
+                    }],
+                'phones': ['555-555-5555', '555-555-5556'],
+                'emails': ['enlist_now_no_questions_asked@the-wall.org']
+                },
+                {'name': 'Lanister Corp.',
+                 'address': [{
+                    'street': '123 Gold Rd.',
+                    'city': 'Casterly Rock',
+                    'state': 'KY',
+                    'zip_code': '00000',
+                    'country': 'Westeros'
+                    }],
+                'phones': ['555-555-5555', '555-555-5556'],
+                'emails': ['cash-for-gold@casterlyrock.com']
+                }]
+
+sample_people = [
         {'last_name': 'Snow',
          'first_name': 'Jon',
-         'email_address': 'jon.snow@the-wall.com',
-         'home_phone': '555-555-5555',
-         'work_phone': '555-555-1111'},
-        {'last_name': 'Tarly',
-         'first_name': 'Samwell',
-         'email_address': 'samwell.tarly@the-wall.com',
-         'home_phone': '555-555-2222',
-         'work_phone': '555-555-1111'},
-        {'last_name': 'Baratheon',
-         'first_name': 'Joffrey',
-         'email_address': 'king_4_life@castelyrock.com',
-         'home_phone': '555-555-5555',
-         'work_phone': '555-555-1234'},
-        {'last_name': 'Baelish',
-         'first_name': 'Petry',
-         'email_address': 'littlefinger@vale.biz',
-         'home_phone': '555-555-2222',
-         'work_phone': '555-555-4321'},
-        {'last_name': 'Lannister',
-         'first_name': 'Tyrion',
-         'email_address': 'impin_aint_easy@castelyrock.com',
-         'home_phone': '555-555-5555',
-         'work_phone': '555-555-8888'}]
+         'address': [{
+                    'street': '123 Wall Way',
+                    'unit': 'Office of the Lord Commander',
+                    'city': 'The North',
+                    'state': 'KY',
+                    'zip_code': '00000',
+                    'country': 'Westeros'}],
+         'birth_address': None,
+         'social_scurity': 0,
+         'race': 'white',
+         'sex': 'male',
+         'maritalStatus': 'single',
+         'birthdate': '1994-01-01',
+         'emails': ['jon.snow@the-wall.com'],
+         'phones': ['555-555-5555']}
+         ]
 
+
+sample_users = [{'person': sample_people[0],
+                 'employer': sample_orgs[0]}
+        ]
 
 if __name__ == '__main__':
     print 'Simplixity Data Insertion'
 
     client = MongoClient()
     db = client['simplixity']
-    users = db.users
+    people = db.people
 
-    # Delete all the current users and insert the dummy data
+
+    people.remove(None)
+    result = people.insert(sample_people)
+    print 'Inserted %s people' % len(result)
+
+    users = db.users
     users.remove(None)
-    result = users.insert(sample_data)
+    result = users.insert(sample_users)
     print 'Inserted %s users' % len(result)
 
 

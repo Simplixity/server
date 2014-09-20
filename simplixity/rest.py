@@ -9,6 +9,10 @@ from flask import jsonify
 import uuid
 
 
+@app.rotue('/organization', methods=['GET'])
+def get_orgs():
+    pass
+
 
 @app.route('/user', methods=['POST'])
 def authorize():
