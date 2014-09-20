@@ -3,9 +3,11 @@ REST endpoints for Simplixity
 """
 
 from simplixity import app
+import simplixity.database
 from flask import jsonify
 
 import uuid
+
 
 
 @app.route('/user', methods=['POST'])

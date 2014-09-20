@@ -17,5 +17,5 @@ class Policy(db.Document):
     effectiveStart = db.DateTimeField()
     effectiveEnd = db.DateTimeField()
 
-    is_in_effect = db.BoolField()
+    is_in_effect = db.BooleanField()
 
