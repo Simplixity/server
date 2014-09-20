@@ -6,7 +6,7 @@ import simplixity
 
 if __name__ == '__main__':
     print 'Simplixity Server'
-    simplixity.application.run()
+    simplixity.app.run(debug=True)
 
 
 
