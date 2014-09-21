@@ -10,6 +10,20 @@ from flask import jsonify, render_template
 
 import uuid
 
+### the important API calls
+@app.route('/authentication', methods=['POST'])
+def authenticate():
+    return jsonify({'session_id': uuid.uuid4()})
+
+@app.route('/handshake', methods=['POST'])
+def handshake():
+    return 'farts'
+
+@app.route('/response', methods=['POST'])
+def process_info_response():
+    return 'butt farts'
+
+
 @app.route('/api', methods=['GET'])
 def api_help():
     return render_template('api.html')
