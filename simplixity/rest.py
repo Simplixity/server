@@ -21,7 +21,7 @@ def handshake():
 
 @app.route('/response', methods=['POST'])
 def process_info_response():
-    return 'butt farts'
+    return jsonify({'status': 'Success', 'fields_sent': {}})
 
 
 @app.route('/api', methods=['GET'])
