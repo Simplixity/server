@@ -13,7 +13,10 @@ import uuid
 ### the important API calls
 @app.route('/authentication', methods=['POST'])
 def authenticate():
-    print request.data
+    for key,val in request.form.items():
+        print '%s, %s' % (key, val)
+
+
     return jsonify({'session_id': uuid.uuid4()})
 
 @app.route('/handshake', methods=['POST'])
