@@ -20,7 +20,7 @@
         $('#first_name').val(result.first_name);
         $('#last_name').val(result.last_name);
         $('#social_security').val(result.social_security);
-        $('#birthdate').val(result.birth_date);
+        $('#birthdate').val(Date(result.birth_date['$date']));
         $('#sex').val(result.sex);
         $('#marital_status').val(result.marital_status);
 
