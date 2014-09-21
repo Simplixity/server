@@ -28,8 +28,9 @@ def authenticate():
 @app.route('/handshake', methods=['POST'])
 def handshake():
     incoming_json = request.get_json()
-    target_id = incoming_json['target_system']
-    user_id = incoming_json['user_id']
+    target_id = incoming_json['target_system_id']
+    username = incoming_json['username']
+    user_id = 'asdf' # fix me
 
     # find our  user data and put it in the bucket
     #try:
