@@ -11,7 +11,7 @@ from simplixity.database import User, Person, Organization, Policy
 from mongoengine.base import ValidationError
 
 from flask import jsonify, render_template, request, g
-
+import json
 import uuid
 
 bucket = Bucket()
@@ -69,8 +69,8 @@ from time import sleep
 @app.route('/poll', methods=['GET', 'POST'])
 def long_poll():
     sleep(10)
-    return jsonify({fields: ['First Name', 'Last Name', 'Phone', 'Address', 'Social Security',
-        'Religious Preference', 'Employer', 'Birthdate', 'Email']})
+    return json.dumps(['First Name', 'Last Name', 'Phone', 'Address', 'Social Security',
+        'Religious Preference', 'Employer', 'Birthdate', 'Email'])
 
 
 @app.route('/api', methods=['GET'])
