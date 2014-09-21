@@ -41,6 +41,13 @@ class Bucket(dict):
 
         Returns a list of  dicts of patient IDs and names"""
 
-        return self.target_systems.get(target_system, {})
+        patients = self.target_systems.get(target_system, {})
+        print patients
+        result = {}
+        for patient_id, patient in patients.items():
+            result[patient_id] = { 'first_name': patient.first_name, 'last_name': patient.last_name }
+
+        return result
+
 
 
