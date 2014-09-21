@@ -15,6 +15,7 @@ import json
 import uuid
 
 bucket = Bucket()
+stored_person = None
 
 ### the important API calls
 @app.route('/authentication', methods=['POST'])
@@ -28,6 +29,7 @@ def authenticate():
 
 @app.route('/handshake', methods=['POST'])
 def handshake():
+    global stored_person
     incoming_json = request.get_json()
     print incoming_json
     target_id = incoming_json['target_system_id']
@@ -39,6 +41,7 @@ def handshake():
         p = Person.objects(pk=user_id)[0]
         print u
         print p
+        stored_person = p
         bucket.put(target_id, user_id, p)
     except ValidationError:
         return jsonify({'acknowledgement': False, 'message': 'Could not find user with ID %s' % user_id})
@@ -68,7 +71,7 @@ def get_patient(target_id, patient_id):
 from time import sleep
 @app.route('/poll', methods=['GET', 'POST'])
 def long_poll():
-    sleep(10)
+    sleep(5)
     return json.dumps(['Personal', 'Employer', 'Mother', 'Father',
         'Guardian', 'Emergency', 'Medical Insurance', 'Medical Conditions'])
 
@@ -104,9 +107,17 @@ def recover_password():
 def register():
     pass
 
+
 @app.route('/person/<person_id>', methods=['GET'])
 def get_person(person_id):
-    return Person.objects(pk=person_id).to_json()
+    global stored_person
+    if stored_person:
+        return stored_person.to_json()
+    else:
+        return jsonify({})
+
+    #return Person.objects(pk=person_id).to_json()
+    # return stored_person
 
 
 @app.route('/policy/<policy_id>', methods=['GET'])
