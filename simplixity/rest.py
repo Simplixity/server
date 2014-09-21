@@ -4,11 +4,14 @@ REST endpoints for Simplixity
 
 from simplixity import app
 from simplixity import db
+from simplixity.bucket import Bucket
 from simplixity.database import User, Person, Organization, Policy
 
 from flask import jsonify, render_template, request
 
 import uuid
+
+bucket = Bucket()
 
 ### the important API calls
 @app.route('/authentication', methods=['POST'])
@@ -22,12 +25,24 @@ def authenticate():
 
 @app.route('/handshake', methods=['POST'])
 def handshake():
+    # put some data in the bucket
     return jsonify({'acknowledgement': True})
 
 @app.route('/response', methods=['POST'])
 def process_info_response():
     incoming_json = request.get_json()
     return jsonify({'status': 'Success', 'fields_sent': incoming_json})
+
+@app.route('/patient/<target_id>', methods=['GET'])
+def get_patient_list(target_id):
+    result = bucket.get_patient_names(target_id)
+    return jsonify(result)
+
+@app.route('/patient/<target_id>/<patient_id>', methods=['GET'])
+def get_patient(target_id, patient_id):
+    data = bucket.get(target_id, patient_id)
+    return jsonify({})
+
 
 
 @app.route('/api', methods=['GET'])
