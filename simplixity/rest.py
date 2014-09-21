@@ -66,10 +66,11 @@ def get_patient(target_id, patient_id):
 
 
 from time import sleep
-@app.route('/poll', methods=['GET'])
+@app.route('/poll', methods=['GET', 'POST'])
 def long_poll():
     sleep(10)
-    return jsonify({'acknowledge': True})
+    return jsonify({fields: ['First Name', 'Last Name', 'Phone', 'Address', 'Social Security',
+        'Religious Preference', 'Employer', 'Birthdate', 'Email']})
 
 
 @app.route('/api', methods=['GET'])
