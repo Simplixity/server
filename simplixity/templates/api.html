@@ -4,6 +4,17 @@
 {%block content %}
 
 <h1>API Reference</h1>
+<h3>REST calls you probably care about.</h3>
+Establishes a session.  Send both a <code>username</code> and a <code>password</code>.  Returns a
+<code>session_id</code> that identifies this session.
+<pre>POST /authentication</pre>
+Make a handshake with the server. Send a <code>username</code> and a <code>target_system_id</code>.
+Returns all the available data that Simplixity has.
+<pre>POST /handshake</pre>
+Sends an info response to Simplixity to authorize it to send the selected data to the target machine.
+<pre>POST /response</pre>
+
+
 <h3>Users and Policies</h3>
 Get all the users
 <pre>GET /user</pre>
