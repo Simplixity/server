@@ -14,3 +14,4 @@ application.config['MONGODB_SETTINGS'] = {'DB': 'simplixity'}
 application.config['SECRET_KEY'] = 'DontTellNoOne'
 
 db = MongoEngine(application)
+fields = []

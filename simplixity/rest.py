@@ -2,6 +2,7 @@
 REST endpoints for Simplixity
 """
 
+from simplixity import fields
 from simplixity import app
 from simplixity import db
 from simplixity.bucket import Bucket
@@ -9,7 +10,7 @@ from simplixity.database import User, Person, Organization, Policy
 
 from mongoengine.base import ValidationError
 
-from flask import jsonify, render_template, request
+from flask import jsonify, render_template, request, g
 
 import uuid
 
@@ -44,6 +45,8 @@ def handshake():
 
     return jsonify({'acknowledgement': True, 'messsage': 'Sending data to target %s' % target_id})
 
+
+
 @app.route('/response', methods=['POST'])
 def process_info_response():
     incoming_json = request.get_json()
@@ -54,12 +57,19 @@ def get_patient_list(target_id):
     result = bucket.get_patient_names(target_id)
     return jsonify(result)
 
-@app.route('/patient/<target_id>/<patient_id>', methods=['GET'])
-def get_patient(target_id, patient_id):
-    data = bucket.get(target_id, patient_id)
-    print data.to_json()
-    return data.to_json()
 
+@app.route('/patient/<target_id>/<patient_id>', methods=['POST'])
+def get_patient(target_id, patient_id):
+    incoming_json = request.get_json()
+    fields = ['asdf']
+    return jsonify({'acknowledge': True, 'message': 'Sending fields to user for approval'})
+
+
+from time import sleep
+@app.route('/poll', methods=['GET'])
+def long_poll():
+    sleep(10)
+    return jsonify({'acknowledge': True})
 
 
 @app.route('/api', methods=['GET'])
