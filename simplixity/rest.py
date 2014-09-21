@@ -29,11 +29,9 @@ def authenticate():
 def handshake():
     incoming_json = request.get_json()
     target_id = incoming_json['target_system_id']
-    username = incoming_json['username']
-    user_id = 'asdf' # fix me
+    user_id = incoming_json['username']
 
     # find our  user data and put it in the bucket
-    #try:
     try:
         u = User.objects(pk=user_id)[0]
         p = Person.objects(pk=user_id)[0]
@@ -42,7 +40,6 @@ def handshake():
         bucket.put(target_id, user_id, p)
     except ValidationError:
         return jsonify({'acknowledgement': False, 'message': 'Could not find user with ID %s' % user_id})
-
 
     return jsonify({'acknowledgement': True, 'messsage': 'Sending data to target %s' % target_id})
 
