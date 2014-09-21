@@ -6,7 +6,7 @@ from simplixity import app
 from simplixity import db
 from simplixity.database import User, Person, Organization, Policy
 
-from flask import jsonify, render_template
+from flask import jsonify, render_template, request
 
 import uuid
 
@@ -21,7 +21,8 @@ def handshake():
 
 @app.route('/response', methods=['POST'])
 def process_info_response():
-    return jsonify({'status': 'Success', 'fields_sent': {}})
+    incoming_json = request.get_json()
+    return jsonify({'status': 'Success', 'fields_sent': incoming_json})
 
 
 @app.route('/api', methods=['GET'])
