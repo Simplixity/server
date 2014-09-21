@@ -1,96 +1,28 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 {% block title %}List of Requested Appointments{% endblock %}
-
 <div class="col-md-12">
-	<div class="modal-dialog" style="margin-bottom:0">
-{% block content %}
-{% for message in get_flashed_messages() %}
-<!--<div class="alert alert-success alert-dismissible" role="alert">{{ message }}</div>-->
-{% endfor %}
-
-<div class="container">
-    <div class="row col-md-6 col-md-offset-2 custyle">
-    <table id='patient_list' class="table table-striped custab">
-    </table>
+    <div class="modal-dialog" style="margin-bottom:0">
+      {% block content %} 
+      {% for message in get_flashed_messages() %}
+      {% endfor %}
+      <div id='status' />
+      <div class="container">
+          <div class="row col-md-6 col-md-offset-2 custyle">
+              <table id='patient_list' class="table table-striped custab"></table>
+          </div>
+      </div>
     </div>
 </div>
-
-
-</div></div>
-
 <script type=text/javascript>
+ (function() {
+    var endpoint_url = '/patient/{{dr_id}}';
 
-(function() {
-	var endpoint_url = 'http://104.131.15.123:8080/patient/';
-  var dr_id = '{{dr_id}}';
-  var json = {
-  "541e065556602720c48baa6f": {
-    "first_name": "Marshall", 
-    "last_name": "Blick"
-  }, 
-  "541e065556602720c48baa71": {
-    "first_name": "Helyn", 
-    "last_name": "Smith"
-  }, 
-  "541e065556602720c48baa73": {
-    "first_name": "Rhona", 
-    "last_name": "Conroy"
-  }, 
-  "541e065556602720c48baa75": {
-    "first_name": "Angella", 
-    "last_name": "Jacobson"
-  }, 
-  "541e065556602720c48baa77": {
-    "first_name": "Marybeth", 
-    "last_name": "Schmitt"
-  }, 
-  "541e065556602720c48baa79": {
-    "first_name": "Ozella", 
-    "last_name": "Lockman"
-  }, 
-  "541e065556602720c48baa7b": {
-    "first_name": "Texie", 
-    "last_name": "Heller"
-  }, 
-  "541e065556602720c48baa7d": {
-    "first_name": "Mordechai", 
-    "last_name": "Smitham"
-  }, 
-  "541e065556602720c48baa7f": {
-    "first_name": "Cannie", 
-    "last_name": "Tromp"
-  }, 
-  "541e065556602720c48baa81": {
-    "first_name": "Luis", 
-    "last_name": "Kuvalis"
-  }
-};
-$('#patient_list').append('<tr><th>Patient Id</th><th>First name</th><th>Last name</th><th class="text-center">Action</th></tr>');
-$.each( json, function( key, value ) {
-$('#patient_list tr:last').after('<tr><td>'+key+'</td><td>'+value.first_name+'</td><td>'+value.first_name+'</td><td class="text-center"><a class="btn btn-info btn-xs" href="/doctor/'+dr_id+'/'+key+'"><span class="glyphicon glyphicon-share"></span> Request Information</a></td></tr>');
-});
-
-  
-  
-  $.getJSON(endpoint_url + dr_id, function() {
-      console.log("success");
-      $table = $('#patient_list');
-      $table.empty();
-      $('<thead>').append($('<tr>').append($('<th>', {'text':'Patient Id'})))
-    })
-    .done(function() {
-
-    })
-    .fail(function() {
-
-    })
-    .always(function() {
-      console.log("complete");
+    $.getJSON(endpoint_url, function(json) {
+        $('#patient_list').append('<tr><th>Patient Id</th><th>First name</th><th>Last name</th><th class="text-center">Action</th></tr>');
+        $.each(json, function(key, value) {
+            $('#patient_list tr:last').after('<tr><td>' + key + '</td><td>' + value.first_name + '</td><td>' + value.last_name + '</td><td class="text-center"><a class="btn btn-info btn-xs" href="/doctor/' + dr_id + '/' + key + '"><span class="glyphicon glyphicon-share"></span> Request Information</a></td></tr>');
+        });
     });
-
-
 })();
-$table = $('table#patient_list');
-
 </script>
 {% endblock %}

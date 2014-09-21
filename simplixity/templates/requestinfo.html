@@ -5,33 +5,38 @@
 <h1>{{ message }}</h1>
 {% endfor %}
 <div class="col-md-12">
-    <div class="modal-dialog" style="margin-bottom:0">
-        <div class="modal-content">
-            <div class="panel-heading">
-                 <h3 class="panel-title">Request for type of information from Patient # {{patient_id}}</h3>
-
-            </div>
-            <div class="panel-body">
-                <div class="checkboxes">
-                    <label>
-                        <input type="checkbox">Full Name</label>
-                    <br/>
-                    <label>
-                        <input type="checkbox">Social Security Number</label>
-                    <br/>
-                    <label>
-                        <input type="checkbox">Home Address</label>
-                    <br/>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
+  <div class="modal-dialog" style="margin-bottom:0">
+    <div class="modal-content">
+      <div class="panel-heading">
+        <h3 class="panel-title">Request for type of information from Patient # {{patient_id}}</h3>
+      </div>
+      <div class="panel-body">
+        <div class="checkboxes">
+          <label>
+            <input type="checkbox">Full Name</label>
+          <br/>
+          <label>
+            <input type="checkbox">Social Security Number</label>
+          <br/>
+          <label>
+            <input type="checkbox">Home Address</label>
+          <br/>
         </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
     </div>
+  </div>
 </div>
 <script>
-var asdf ={"_id": {"$oid": "541e065556602720c48baa6f"}, "_cls": "Person", "created_at": {"$date": 1411239445756}, "first_name": "Marshall", "last_name": "Blick", "addresses": [{"street": "0268 Harm Path", "city": "South Sheliaville", "state": "NewHampshire", "country": "Monaco"}], "social_security": 0, "sex": "female", "race": "white", "birth_date": {"$date": 1155513600000}, "emails": ["raynor.leila@gmail.com"]};
-
-$('#checkboxes').append('test');
-
+(function() {
+    var endpoint_url = '/patient/{{dr_id}}/{{patient_id}}';
+    
+    $.getJSON(endpoint_url, function(json) {
+        $('#patient_list').append('<tr><th>Patient Id</th><th>First name</th><th>Last name</th><th class="text-center">Action</th></tr>');
+        $.each(json, function(key, value) {
+            $('#patient_list tr:last').after('<tr><td>' + key + '</td><td>' + value.first_name + '</td><td>' + value.last_name + '</td><td class="text-center"><a class="btn btn-info btn-xs" href="/doctor/' + dr_id + '/' + key + '"><span class="glyphicon glyphicon-share"></span> Request Information</a></td></tr>');
+        });
+    });
+})();
 </script>
 {% endblock %}
