@@ -7,6 +7,8 @@ from simplixity import db
 from simplixity.bucket import Bucket
 from simplixity.database import User, Person, Organization, Policy
 
+from mongoengine.base import ValidationError
+
 from flask import jsonify, render_template, request
 
 import uuid
@@ -25,8 +27,23 @@ def authenticate():
 
 @app.route('/handshake', methods=['POST'])
 def handshake():
-    # put some data in the bucket
-    return jsonify({'acknowledgement': True})
+    incoming_json = request.get_json()
+    target_id = incoming_json['target_system']
+    user_id = incoming_json['user_id']
+
+    # find our  user data and put it in the bucket
+    #try:
+    try:
+        u = User.objects(pk=user_id)[0]
+        p = Person.objects(pk=user_id)[0]
+        print u
+        print p
+        bucket.put(target_id, user_id, p)
+    except ValidationError:
+        return jsonify({'acknowledgement': False, 'message': 'Could not find user with ID %s' % user_id})
+
+
+    return jsonify({'acknowledgement': True, 'messsage': 'Sending data to target %s' % target_id})
 
 @app.route('/response', methods=['POST'])
 def process_info_response():
