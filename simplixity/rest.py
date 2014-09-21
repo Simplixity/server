@@ -37,6 +37,7 @@ def authorize():
 def recover_password():
     pass
 
+@app.route('/register', methods=['POST'])
 def register():
     pass
 
