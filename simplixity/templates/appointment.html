@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Make an Appointment{% endblock %}
+{% block content %}
+<div class="page-header">
+<h3>Make an Appointment</h3>
+</div>
+<form action="{{ url_for('rest.register') }}" method="post" class="form-horizontal">
+
+<div class="form-actions">
+	<button type="submit" class="btn btn-icon btn-primary">Send</button>
+</div>
+</form>
+{% endblock %}

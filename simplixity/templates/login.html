@@ -1,14 +1,32 @@
 {% extends 'base.html' %}
-{% block title %}Login{% endblock %}
+{% block title %}Doctor Login{% endblock %}
 {% block content %}
-<div class="page-header">
-<h3>Login</h3>
-</div>
-<form action="{{ url_for('rest.authorize') }}" method="post" class="form-horizontal">
 
-<div class="form-actions">
-<button type="submit" class="btn btn-icon btn-primary">Send</button>
-<a href="{{ url_for('rest.recover_password') }}" class="btn btn-link">Forgot Password?</a>
+<div class="col-md-12">
+    <div class="modal-dialog" style="margin-bottom:0">
+        <div class="modal-content">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Log In</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form" method=post action="/">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Doctor Id" name="doctorid" type="id" required="required" autofocus="">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Password" name="password" type="password" required="required" value="">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Login</button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+    </div>
 </div>
-</form>
 {% endblock %}

@@ -2,7 +2,24 @@
 <html>
 <head>
     <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-theme.css')}}">
+    <script type=text/javascript src="{{url_for('static', filename='js/jquery-1.11.1.min.js')}}"></script>
+    <title>{% block title %}{% endblock %} - Doctor's Office</title>
+
+    <style>
+    .custab{
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 5% 0;
+    box-shadow: 3px 3px 2px #ccc;
+    transition: 0.5s;
+    }
+.custab:hover{
+    box-shadow: 3px 3px 0px transparent;
+    transition: 0.5s;
+    }
+    </style>
+
 </head>
 <body>
   <div id="wrapper">
