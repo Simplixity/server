@@ -28,6 +28,7 @@ def authenticate():
 @app.route('/handshake', methods=['POST'])
 def handshake():
     incoming_json = request.get_json()
+    print incoming_json
     target_id = incoming_json['target_system_id']
     user_id = incoming_json['username']
 
