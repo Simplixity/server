@@ -41,7 +41,8 @@ def get_patient_list(target_id):
 @app.route('/patient/<target_id>/<patient_id>', methods=['GET'])
 def get_patient(target_id, patient_id):
     data = bucket.get(target_id, patient_id)
-    return jsonify({})
+    print data.to_json()
+    return data.to_json()
 
 
 
