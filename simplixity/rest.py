@@ -17,7 +17,7 @@ def authenticate():
 
 @app.route('/handshake', methods=['POST'])
 def handshake():
-    return 'farts'
+    return jsonify({'acknowledgement': True})
 
 @app.route('/response', methods=['POST'])
 def process_info_response():
