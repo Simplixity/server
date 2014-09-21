@@ -69,8 +69,8 @@ from time import sleep
 @app.route('/poll', methods=['GET', 'POST'])
 def long_poll():
     sleep(10)
-    return json.dumps(['First Name', 'Last Name', 'Phone', 'Address', 'Social Security',
-        'Religious Preference', 'Employer', 'Birthdate', 'Email'])
+    return json.dumps(['Personal', 'Employer', 'Mother', 'Father',
+        'Guardian', 'Emergency', 'Medical Insurance', 'Medical Conditions'])
 
 
 @app.route('/api', methods=['GET'])
